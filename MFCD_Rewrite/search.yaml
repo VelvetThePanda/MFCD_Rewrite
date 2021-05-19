@@ -1,0 +1,11 @@
+﻿search:
+  - tags:
+      - pog
+      - big_*
+    pages: 2
+    folder: ./pog
+
+  - tags:
+      - cute
+      - kissing
+    pages: 10

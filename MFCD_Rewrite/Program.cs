@@ -1,23 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Dasync.Collections;
+using MFCD.Downloader;
 using MFCD.Utilities;
 using SharpYaml;
 using SharpYaml.Serialization;
+using ShellProgressBar;
 
 if (!File.Exists("./search.yaml"))
     ErrorHelper.MissingSearchFile();
 
-
-
-var serial = new Serializer();
-var search = new Search();
-
-
-
 try
 {
-    search = serial.Deserialize<Search>(File.ReadAllText("./search.yaml"));
+    var search = new Serializer().Deserialize<Search>(File.ReadAllText("./search.yaml"));
 }
 catch (YamlException)
 {

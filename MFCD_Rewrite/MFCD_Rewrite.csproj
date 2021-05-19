@@ -12,7 +12,14 @@
       <PackageReference Include="AsyncEnumerator" Version="4.0.2" />
       <PackageReference Include="Goblinfactory.Konsole" Version="7.0.0.7-alpha" />
       <PackageReference Include="SharpYaml" Version="1.6.6" />
+      <PackageReference Include="ShellProgressBar" Version="5.1.0" />
       <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="search.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
