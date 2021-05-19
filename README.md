@@ -38,6 +38,8 @@ search:
       - -owo
     pages: 10
 ```
+As a side note, if you do not specify the folder, it will save content to a folder named with the tags specified for that search.
+You can search up to 750 pages, but you may not get 750 pages worth of content depending on what you're searching for.
 
 ## It's saying I'm missing username or api key! / It just crashes
 If you experience the application suddenly closing, or printing a message reading "you're missing the "x" property in your search.yaml", it's because you are.
