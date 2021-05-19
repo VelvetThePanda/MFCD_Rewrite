@@ -1,11 +1,16 @@
-﻿username: VelvetThePanda
-key: L4vkSQbUL7UmVjFepBrH7diM
+﻿#Make yourself familiar with https://github.com/VelvetThePanda/MFCD_Rewrite
+username: <your username here>
+key: <your key here>
+
+# This rescriction will be lifted in the future!
 search:
-  - tags:
-      - pog
+  - tags: # all tags are combined per search. 
+      - paws
       - big_*
     pages: 2
-    folder: pog
+    folder: pawbs # This is *relative* to the folder the app is in. If you have the app in C:/Users/Me/Desktop, 
+                  # It will make a folder in C:/Users/Me/Desktop/ called pawbs, and save all your images there.
+                  # 3.0 May save pools into folders. Only time will tell.
 
   - tags:
       - cute
