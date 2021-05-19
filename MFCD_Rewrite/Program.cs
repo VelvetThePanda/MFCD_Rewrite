@@ -45,21 +45,21 @@ try
     
     foreach (Search search in searchConfig.Searches)
     {
-        foreach (Stream str in search.Streams)
+        await search.Streams.ParallelForEachAsync(async str =>
         {
             using var sr = new StreamReader(str);
             string json = await sr.ReadToEndAsync();
             var result = JsonConvert.DeserializeObject<E621Result>(json);
             string path = search.Folder is null ? $"./{string.Join(' ', search.Tags)}/" : $"./{search.Folder}/";
             Directory.CreateDirectory(path);
-            
+
             bar.MaxTicks += result!.Posts.Length;
-            
+
             foreach (Post post in result.Posts!)
             {
                 var filename = $"{post.File.Md5}.{post.File.Ext}";
                 using ChildProgressBar cbar = bar.Spawn(1, $"Downloading {filename}");
-                
+
                 if (File.Exists(path + filename))
                 {
                     cbar.Tick("File exists; skipping");
@@ -67,14 +67,14 @@ try
                     Thread.Sleep(10);
                     continue;
                 }
-                
+
                 Stream imageContent = await client.GetStreamAsync(post.File.Url);
                 await using var writer = new FileStream(path + filename, FileMode.Create);
                 await imageContent.CopyToAsync(writer);
                 cbar.Tick("Wrote to disk");
                 bar.Tick();
             }
-        }
+        }, 12);
     }
     
     bar.Tick("Done!");
