@@ -29,9 +29,9 @@ try
         ErrorHelper.MissingUsername();
     if (searchConfig.ApiKey is null)
         ErrorHelper.MissingApiKey();
-    
-    
-    using var bar = new ProgressBar(3, "Fetching content from e621.net", new ProgressBarOptions() {ProgressBarOnBottom = true, CollapseWhenFinished = true, ProgressCharacter = '─'});
+
+    var opts = new ProgressBarOptions() {ProgressBarOnBottom = true, CollapseWhenFinished = true, ProgressCharacter = '─'};
+    using var bar = new ProgressBar(3, "Fetching content from e621.net", opts);
 
     foreach (Search search in searchConfig.Searches)
     {
@@ -58,7 +58,7 @@ try
             foreach (Post post in result.Posts!)
             {
                 var filename = $"{post.File.Md5}.{post.File.Ext}";
-                using ChildProgressBar cbar = bar.Spawn(1, $"Downloading {filename}");
+                using ChildProgressBar cbar = bar.Spawn(1, $"Downloading {filename}", opts);
 
                 if (File.Exists(path + filename))
                 {
@@ -76,9 +76,11 @@ try
             }
         }, 12);
     }
-    
-    bar.Tick("Done!");
-    Thread.Sleep(5000);
+
+    bar.MaxTicks = 0;
+    Console.Clear();
+    Console.WriteLine("Done! Consider donating? https://ko-fi.com/VelvetThePanda\nPress any key to exit.");
+    Console.ReadKey();
 }
 catch (YamlException)
 {
@@ -86,6 +88,3 @@ catch (YamlException)
     Thread.Sleep(4000);
     Environment.Exit(-1);
 }
-
-
-Console.ReadKey();
