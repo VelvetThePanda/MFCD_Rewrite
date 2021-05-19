@@ -1,11 +1,13 @@
-﻿search:
+﻿username: VelvetThePanda
+key: L4vkSQbUL7UmVjFepBrH7diM
+search:
   - tags:
       - pog
       - big_*
     pages: 2
-    folder: ./pog
+    folder: pog
 
   - tags:
       - cute
-      - kissing
+      - -owo
     pages: 10

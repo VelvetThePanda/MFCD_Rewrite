@@ -4,10 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
-using Dasync.Collections;
 using MFCD.BooruResults.e621;
-using MFCD.UI;
 using ShellProgressBar;
 
 namespace MFCD.Downloader
@@ -20,7 +17,7 @@ namespace MFCD.Downloader
         private readonly int _pages;
         public e621Downloader(string username, string apiKey, int pages, ProgressBar bar) // For the best experience, this is required. //
         {
-            _bar = bar.Spawn(pages, "fetching content from e621.net..", new() {CollapseWhenFinished = true});
+            _bar = bar.Spawn(pages, "fetching content from e621.net..", new() {ProgressBarOnBottom = true, CollapseWhenFinished = true, ProgressCharacter = '─'});
             _pages = pages;
             byte[] cred = Encoding.GetEncoding("ISO-8859-1").GetBytes($"{username}:{apiKey}");
             _client.DefaultRequestHeaders.Add("Authorization", $"Basic {Convert.ToBase64String(cred)}");
